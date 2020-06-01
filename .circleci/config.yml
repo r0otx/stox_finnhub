@@ -1,0 +1,22 @@
+version: 2.1
+build_image: &build_image
+  docker:
+    - image: circleci/node:12.14.1
+jobs:
+  build-and-deploy:
+    <<: *build_image
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn build
+      - run: |
+          echo { \"projects\": { \"default\": \"$FIREBASE_PROJECT_ID\" } } > .firebaserc
+      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build-and-deploy:
+          filters:
+            branches:
+              only: master
