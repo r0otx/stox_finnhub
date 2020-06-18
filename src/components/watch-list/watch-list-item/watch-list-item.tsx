@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, useCallback } from 'react'
 import { throttleTime } from 'rxjs/operators'
-import { Box, Typography, colors, IconButton, ButtonBase } from '@material-ui/core'
+import {Box, Typography, colors, IconButton, ButtonBase, Divider} from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 
 import { subscribe } from '../../../finnhub-api/finnhub-api-socket'
@@ -22,7 +22,7 @@ export const WatchListItem: FunctionComponent<{
   onRemove: () => void
   onError: () => void
 }> = ({ edit, symbol, onSelect, onRemove, onProfileLoad, onError }) => {
-  const { isLoaded, isError, currentPrice, previousPrice, profile } = useWatchListItemLoad(symbol)
+  const { isLoaded, isError, currentPrice, previousPrice, profile, openPrice, highPrice, lowPrice } = useWatchListItemLoad(symbol)
 
   const [price, setPrice] = useState(0)
   const [isLive, setIsLive] = useState(false)
@@ -174,6 +174,19 @@ export const WatchListItem: FunctionComponent<{
                     {getStatus()}
                   </Typography>
                 </Box>
+              </Typography>
+            </Box>
+          </Box>
+          <Box component="span">
+            <Box minWidth="0" mr={1} flexBasis="50%">
+              <Typography variant="body1" style={{ fontWeight: 300 }} noWrap>
+                Open Price: {openPrice}
+              </Typography>
+              <Typography variant="body1" style={{ fontWeight: 300 }} noWrap>
+                Low Price: {lowPrice}
+              </Typography>
+                <Typography variant="body1" style={{ fontWeight: 300 }} noWrap>
+                High Price: {highPrice}
               </Typography>
             </Box>
           </Box>

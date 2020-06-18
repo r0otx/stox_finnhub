@@ -6,7 +6,7 @@ import { ChartWrapper } from './components/chart/chart-wrapper'
 import { FinnhubStockProfile } from './finnhub-api/finnhub-api-types'
 
 import { useSymbolsListLoad } from './app-hooks'
-import { SentimentVeryDissatisfiedRounded, BusinessCenterRounded } from '@material-ui/icons'
+import { SentimentVeryDissatisfiedRounded } from '@material-ui/icons'
 
 const App: FunctionComponent<{}> = () => {
   const theme = useTheme()
@@ -14,23 +14,25 @@ const App: FunctionComponent<{}> = () => {
   const { options: symbolOptions } = useSymbolsListLoad()
   const [stockProfile, setStockProfile] = useState<FinnhubStockProfile>()
   const [stockSymbol, setStockSymbol] = useState<string>()
+  console.log(stockProfile);
+  console.log(stockSymbol)
   const [isError, setIsError] = useState(false)
 
   return (
-    <Container style={{ flexGrow: 1 }}>
+    <Container style={{ flexGrow: 1 }} maxWidth={false}>
       <Box
-        py={4}
+        py={2}
         display={'grid'}
         height="100%"
-        gridColumnGap={theme.spacing(4)}
-        gridRowGap={theme.spacing(4)}
-        gridTemplateColumns={['1fr', '1fr', '3fr 7fr']}
-        gridTemplateRows={['max-content', 'max-content', 'max-content 55vh auto']}
+        gridColumnGap={theme.spacing(1)}
+        gridRowGap={theme.spacing(1)}
+        gridTemplateColumns={['1fr', '1fr', '3fr 5fr 5fr']}
+        gridTemplateRows={['1fr', '1fr', 'max-content max-content max-content']}
       >
         <Box
           display="flex"
           alignItems="center"
-          gridColumn={['1/1', '1/1', '1 / span 2']}
+          gridColumn={['1/1', '1/1', '1 / span 3']}
           minWidth="0"
         >
         </Box>
@@ -98,6 +100,58 @@ const App: FunctionComponent<{}> = () => {
               )
           )}
         </Box>
+          <Box minWidth={0}>
+              {isError ? (
+                  <Box
+                      component={Paper}
+                      height="100%"
+                      p={10}
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      alignItems="center"
+                  >
+                      <Box mb={2}>
+                          <SentimentVeryDissatisfiedRounded color="inherit" />
+                      </Box>
+                      <Typography variant="body1" align="center">
+                          Ooops!
+                          <br />
+                          The API is down for the moment.
+                      </Typography>
+                  </Box>
+              ) : (
+                  (stockProfile || stockSymbol) && (
+                      <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
+                  )
+              )}
+          </Box>
+          <Box minWidth={0}>
+              {isError ? (
+                  <Box
+                      component={Paper}
+                      height="100%"
+                      p={10}
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      alignItems="center"
+                  >
+                      <Box mb={2}>
+                          <SentimentVeryDissatisfiedRounded color="inherit" />
+                      </Box>
+                      <Typography variant="body1" align="center">
+                          Ooops!
+                          <br />
+                          The API is down for the moment.
+                      </Typography>
+                  </Box>
+              ) : (
+                  (stockProfile || stockSymbol) && (
+                      <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
+                  )
+              )}
+          </Box>
       </Box>
     </Container>
   )

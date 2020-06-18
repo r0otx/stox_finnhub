@@ -69,6 +69,8 @@ export const ChartWrapper: FunctionComponent<{
     isLoading,
   } = useLoadChartData(profile?.ticker ?? symbol ?? '')
 
+
+
   const chartDerivedDataDetailsRef = useRef<ChartDataDerivedDetails>({})
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export const ChartWrapper: FunctionComponent<{
   }, [data])
 
   return (
-    <Box component={Paper} display="flex" flexDirection="column" height="110%">
+    <Box component={Paper} display="flex" flexDirection="column" height="100%">
       <Box
         p={4}
         display="flex"
