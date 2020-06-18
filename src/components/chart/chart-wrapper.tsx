@@ -76,7 +76,7 @@ export const ChartWrapper: FunctionComponent<{
   }, [data])
 
   return (
-    <Box component={Paper} display="flex" flexDirection="column" height="100%">
+    <Box component={Paper} display="flex" flexDirection="column" height="110%">
       <Box
         p={4}
         display="flex"

@@ -33,32 +33,6 @@ const App: FunctionComponent<{}> = () => {
           gridColumn={['1/1', '1/1', '1 / span 2']}
           minWidth="0"
         >
-          <Box>
-            <Typography
-              variant="h1"
-              color="primary"
-              style={{
-                fontSize: 42,
-                fontWeight: 400,
-                background: `-webkit-linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              stox
-            </Typography>
-          </Box>
-
-          <Box ml={2} position="relative" top={theme.spacing(1)}>
-            <Typography
-              variant="body2"
-              style={{ fontSize: 10, lineHeight: 1.25, opacity: 0.75, letterSpacing: 0 }}
-            >
-              Your personal Stock
-              <br />
-              Exchange monitor
-            </Typography>
-          </Box>
         </Box>
 
         <Box flexGrow="1" minWidth="0" gridRow={['auto', 'auto', '2 / span 2']}>
@@ -98,22 +72,31 @@ const App: FunctionComponent<{}> = () => {
             )
           )}
         </Box>
-
-        <Box
-          component={Paper}
-          height="100%"
-          p={10}
-          display={['none', 'none', 'flex']}
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Box mb={2}>
-            <BusinessCenterRounded color="inherit" />
-          </Box>
-          <Typography variant="body1" align="center">
-            Cool news coming soon&hellip;
-          </Typography>
+        <Box minWidth={0}>
+          {isError ? (
+              <Box
+                  component={Paper}
+                  height="100%"
+                  p={10}
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems="center"
+              >
+                <Box mb={2}>
+                  <SentimentVeryDissatisfiedRounded color="inherit" />
+                </Box>
+                <Typography variant="body1" align="center">
+                  Ooops!
+                  <br />
+                  The API is down for the moment.
+                </Typography>
+              </Box>
+          ) : (
+              (stockProfile || stockSymbol) && (
+                  <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
+              )
+          )}
         </Box>
       </Box>
     </Container>

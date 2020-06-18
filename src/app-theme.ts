@@ -85,7 +85,7 @@ export default createMuiTheme({
         'html, body, #root': {
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
+          height: '90%',
         },
         // '.MuiToggleButtonGroup-groupedHorizontal:not(:last-child)': {
         //   borderRadius: `99px !important`,
