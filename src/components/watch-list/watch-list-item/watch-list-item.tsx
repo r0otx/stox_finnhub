@@ -21,7 +21,8 @@ export const WatchListItem: FunctionComponent<{
   onProfileLoad: (profile: FinnhubStockProfile) => void
   onRemove: () => void
   onError: () => void
-}> = ({ edit, symbol, onSelect, onRemove, onProfileLoad, onError }) => {
+  getProfile: () => void
+}> = ({ edit, symbol, onSelect, onRemove, onProfileLoad, onError, getProfile }) => {
   const { isLoaded, isError, currentPrice, previousPrice, profile, openPrice, highPrice, lowPrice } = useWatchListItemLoad(symbol)
 
   const [price, setPrice] = useState(0)
