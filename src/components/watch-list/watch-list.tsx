@@ -75,8 +75,6 @@ export const WatchList: FunctionComponent<{
                       onError={onError}
                       onSelect={(profile): void => onSelectedItem(symbol, profile)}
                       onRemove={(): void => removeSymbol(symbol)}
-                      // @ts-ignore
-                      getProfile={(profile)}
                       onProfileLoad={(profile): void => {
                         if (!firstProfileLoadedRef.current) {
                           firstProfileLoadedRef.current = profile

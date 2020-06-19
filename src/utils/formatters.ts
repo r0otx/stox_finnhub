@@ -24,7 +24,7 @@ export const getCurrencyFormatter = (precision = 2, currency = DEFAULT_CURRENCY)
   }
 }
 
-export const getTimestampFormatter = (format = 'MMM d, yyyy - HH:mm') => (
+export const getTimestampFormatter = (format = 'MMM d, yyyy - HH:mm:ss') => (
   timestamp: number,
 ): string =>
   dateFormat(fromUnixTime(isFinite(timestamp) ? timestamp : getUnixTime(new Date())), format)

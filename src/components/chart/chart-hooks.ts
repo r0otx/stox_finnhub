@@ -35,6 +35,16 @@ export const useLoadChartData = (
   const [isError, setIsError] = useState(false)
 
   const [data, setData] = useState<ChartData>([])
+  const [update, setUpdate] = useState(0)
+
+  console.log(data);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUpdate(update => update + 1)
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const loadChartData = async (): Promise<void> => {
@@ -62,7 +72,7 @@ export const useLoadChartData = (
     }
 
     loadChartData()
-  }, [symbol, resolution, timeframe])
+  }, [symbol, resolution, timeframe, update])
 
   const setTimeframe = (timeframe: TimeframeConfig): void => {
     const [optimumResolution, disabledResolutions] = getBestTimelineResolution(timeframe)

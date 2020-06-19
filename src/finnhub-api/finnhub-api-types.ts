@@ -1,4 +1,4 @@
-export type FinnhubStockCandleResolution = '1' | '5' | '15' | '30' | '60' | 'D' | 'W' | 'M'
+export type FinnhubStockCandleResolution = '5S' | '1' | '5' | '15' | '30' | '60' | 'D' | 'W' | 'M' | 'S'
 
 export type FinnhubStockCandleQuery = {
   symbol: string

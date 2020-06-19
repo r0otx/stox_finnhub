@@ -60,6 +60,12 @@ export const timelines: TimelineConfig[] = [
     formatter: getTimestampFormatter('MMM, yy'),
     title: '1 month',
   },
+  {
+    resolution: '5S',
+    label: '5S',
+    formatter: getTimestampFormatter('HH:mm:ss'),
+    title: '5 sec',
+  }
 ]
 
 export const timeframes: TimeframeConfig[] = [

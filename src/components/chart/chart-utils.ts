@@ -15,16 +15,16 @@ export const getBestTimelineResolution = (
   const diffInDays = differenceInDays(to, from)
   const diffInHours = differenceInHours(to, from)
 
-  if (diffInHours <= 2) return ['1', ['15', '30', '60', 'D', 'W', 'M']]
-  if (diffInHours <= 12) return ['1', ['D', 'W', 'M']]
-  if (diffInHours <= 24) return ['1', ['D', 'W', 'M']]
-  if (diffInDays <= 7) return ['15', ['1', '5', 'D', 'W', 'M']]
-  if (diffInDays <= 60) return ['60', ['1', '5', '15', 'M']]
-  if (diffInDays <= 90) return ['D', ['1', '5', '15', '30', 'M']]
-  if (diffInDays <= 180) return ['D', ['1', '5', '15', '30', '60', 'M']]
-  if (diffInDays <= 366) return ['D', ['1', '5', '15', '30', '60']]
+  if (diffInHours <= 2) return ['1', ['15', '30', '60', 'D', 'W', 'M', '5S']]
+  if (diffInHours <= 12) return ['1', ['D', 'W', 'M', '5S']]
+  if (diffInHours <= 24) return ['1', ['D', 'W', 'M', '5S']]
+  if (diffInDays <= 7) return ['15', ['1', '5', 'D', 'W', 'M', '5S']]
+  if (diffInDays <= 60) return ['60', ['1', '5', '15', 'M', '5S']]
+  if (diffInDays <= 90) return ['D', ['1', '5', '15', '30', 'M', '5S']]
+  if (diffInDays <= 180) return ['D', ['1', '5', '15', '30', '60', 'M', '5S']]
+  if (diffInDays <= 366) return ['D', ['1', '5', '15', '30', '60', '5S']]
 
-  return ['M', ['1', '5', '15', '30', '60', 'D']]
+  return ['M', ['1', '5', '15', '30', '60', 'D', '5S']]
 }
 
 export const getChartDataDerivedDetails = (chartData: ChartData): ChartDataDerivedDetails => {
