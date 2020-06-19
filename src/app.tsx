@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import { Container, Box, useTheme, Typography, Paper } from '@material-ui/core'
 
 import { WatchList } from './components/watch-list/watch-list'
@@ -7,6 +7,7 @@ import { FinnhubStockProfile } from './finnhub-api/finnhub-api-types'
 
 import { useSymbolsListLoad } from './app-hooks'
 import { SentimentVeryDissatisfiedRounded } from '@material-ui/icons'
+import {addProfile} from "./store/profile-reducer";
 
 const App: FunctionComponent<{}> = () => {
   const theme = useTheme()
@@ -14,9 +15,12 @@ const App: FunctionComponent<{}> = () => {
   const { options: symbolOptions } = useSymbolsListLoad()
   const [stockProfile, setStockProfile] = useState<FinnhubStockProfile>()
   const [stockSymbol, setStockSymbol] = useState<string>()
-  console.log(stockProfile);
-  console.log(stockSymbol)
   const [isError, setIsError] = useState(false)
+
+    useEffect(() => {
+        addProfile({a: "123"})
+        console.log("It's ok")
+    }, []);
 
   return (
     <Container style={{ flexGrow: 1 }} maxWidth={false}>
@@ -37,12 +41,12 @@ const App: FunctionComponent<{}> = () => {
         >
         </Box>
 
-        <Box flexGrow="1" minWidth="0" gridRow={['auto', 'auto', '2 / span 2']}>
+        <Box flexGrow="1" minWidth="0" gridRow={['auto', 'auto', '2 / span 3']}>
           <WatchList
             symbolOptions={symbolOptions}
             onSelectedItem={(symbol: string, profile?: FinnhubStockProfile): void => {
-              setStockSymbol(symbol)
-              setStockProfile(profile)
+                setStockSymbol(symbol)
+                setStockProfile(profile)
             }}
             onError={(): void => setIsError(true)}
           />
@@ -70,88 +74,11 @@ const App: FunctionComponent<{}> = () => {
             </Box>
           ) : (
             (stockProfile || stockSymbol) && (
-              <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
+              <ChartWrapper symbol="{stockSymbol}" profile={stockProfile} />
             )
           )}
         </Box>
-        <Box minWidth={0}>
-          {isError ? (
-              <Box
-                  component={Paper}
-                  height="100%"
-                  p={10}
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-              >
-                <Box mb={2}>
-                  <SentimentVeryDissatisfiedRounded color="inherit" />
-                </Box>
-                <Typography variant="body1" align="center">
-                  Ooops!
-                  <br />
-                  The API is down for the moment.
-                </Typography>
-              </Box>
-          ) : (
-              (stockProfile || stockSymbol) && (
-                  <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
-              )
-          )}
-        </Box>
-          <Box minWidth={0}>
-              {isError ? (
-                  <Box
-                      component={Paper}
-                      height="100%"
-                      p={10}
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                  >
-                      <Box mb={2}>
-                          <SentimentVeryDissatisfiedRounded color="inherit" />
-                      </Box>
-                      <Typography variant="body1" align="center">
-                          Ooops!
-                          <br />
-                          The API is down for the moment.
-                      </Typography>
-                  </Box>
-              ) : (
-                  (stockProfile || stockSymbol) && (
-                      <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
-                  )
-              )}
-          </Box>
-          <Box minWidth={0}>
-              {isError ? (
-                  <Box
-                      component={Paper}
-                      height="100%"
-                      p={10}
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                  >
-                      <Box mb={2}>
-                          <SentimentVeryDissatisfiedRounded color="inherit" />
-                      </Box>
-                      <Typography variant="body1" align="center">
-                          Ooops!
-                          <br />
-                          The API is down for the moment.
-                      </Typography>
-                  </Box>
-              ) : (
-                  (stockProfile || stockSymbol) && (
-                      <ChartWrapper symbol={stockSymbol} profile={stockProfile} />
-                  )
-              )}
-          </Box>
+
       </Box>
     </Container>
   )

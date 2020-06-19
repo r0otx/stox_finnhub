@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState, useCallback } from 'react'
 import { throttleTime } from 'rxjs/operators'
-import {Box, Typography, colors, IconButton, ButtonBase, Divider} from '@material-ui/core'
+import {Box, Typography, colors, IconButton, ButtonBase} from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
 
 import { subscribe } from '../../../finnhub-api/finnhub-api-socket'
@@ -26,6 +26,7 @@ export const WatchListItem: FunctionComponent<{
 
   const [price, setPrice] = useState(0)
   const [isLive, setIsLive] = useState(false)
+
 
   useEffect(() => {
     if (profile) {

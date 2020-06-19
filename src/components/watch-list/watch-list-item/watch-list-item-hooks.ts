@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { fetchQuotes, fetchStockProfile2 } from '../../../finnhub-api/finnhub-api'
 import { FinnhubStockProfile } from '../../../finnhub-api/finnhub-api-types'
 
+
 export const useWatchListItemLoad = (
-  symbol: string,
+  symbol: string
 ): {
   isLoaded: boolean
   isError: boolean
